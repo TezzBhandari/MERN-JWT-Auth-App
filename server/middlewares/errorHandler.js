@@ -13,6 +13,7 @@ const notFoundError = (req, res, next) => {
 // Custom Error Handler
 const errorHandler = (err, req, res, next) => {
   res.status(err.status || 500).json({
+    success: false,
     status: err.status || 500,
     message: err.message || 'Internal Server Error',
   });
