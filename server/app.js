@@ -1,6 +1,7 @@
 const express = require('express');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 require('dotenv').config();
 
 const connectDB = require('./config/database');
@@ -23,10 +24,11 @@ const start = async () => {
 };
 
 // Middlewares
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser('tosdfjskdjfkskjf-sdfskdjf-skdfjjs'));
+app.use(cookieParser());
 
 // routes
 app.use(routes);

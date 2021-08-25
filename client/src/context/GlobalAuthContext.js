@@ -6,19 +6,27 @@ const AuthContext = React.createContext();
 function GlobalAuthContext({ children }) {
   const [user, setUser] = useState(null);
   const [authenticated, setAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const data = isAuthenticated();
-    setUser(data.user);
-    setAuthenticated(data.isAuthenticated);
-    setIsLoading(true);
+    isAuthenticated()
+      .then((data) => {
+        console.log(data);
+        setUser(data.user);
+        setAuthenticated(data.isAuthenticated);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   return (
-    <div>
+    <>
       {isLoading ? (
-        <h1>Loading...</h1>
+        <div className='loading'>
+          <h1>Loading...</h1>
+        </div>
       ) : (
         <AuthContext.Provider
           value={{ user, setUser, authenticated, setAuthenticated }}
@@ -26,7 +34,7 @@ function GlobalAuthContext({ children }) {
           {children}
         </AuthContext.Provider>
       )}
-    </div>
+    </>
   );
 }
 

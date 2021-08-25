@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  transition: 40s;
+}
+
+.loading h1 {
+  font-size: 6rem;
+  font-weight: 900;
+}
+
+.btn {
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5rem;
+  color: white;
+  text-transform: capitalize;
+  transition: all 0.3s ease 0s;
+}

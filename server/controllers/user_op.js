@@ -69,10 +69,18 @@ const createUser = async (req, res, next) => {
 const logoutUser = (req, res, next) => {
   res.clearCookie('access_token');
   res.status(200).json({
-    success: false,
+    success: true,
     status: 200,
+    user: { username: '', role: '' },
     message: 'successfully logout',
   });
 };
 
-module.exports = { loginUser, createUser, logoutUser };
+const isAuthenticated = (req, res, next) => {
+  res.status(200).json({
+    success: true,
+    user: req.user,
+  });
+};
+
+module.exports = { loginUser, createUser, logoutUser, isAuthenticated };
