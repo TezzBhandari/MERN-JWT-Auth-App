@@ -13,7 +13,7 @@ const loginUser = async (req, res, next) => {
       next(createError(400, 'Empty Field'));
     }
 
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ username }).populate('todos');
     if (!user) {
       next(createError(400, 'No Such User Exist'));
     } else {
@@ -31,9 +31,8 @@ const loginUser = async (req, res, next) => {
         res.status(200).json({
           success: true,
           isAuthenticated: true,
-          message: 'You are authenticated',
-          role: user.role,
-          tokenExpiresIn: expiresIn,
+          message: { isError: false, msgBody: 'Successfully Logged In' },
+          user,
         });
       }
     }
@@ -58,7 +57,7 @@ const createUser = async (req, res, next) => {
       res.status(200).json({
         success: true,
         status: 200,
-        message: 'Sucessfully registered',
+        message: { isError: false, msgBody: 'Successfully Registered' },
       });
     }
   } catch (err) {
@@ -69,10 +68,25 @@ const createUser = async (req, res, next) => {
 const logoutUser = (req, res, next) => {
   res.clearCookie('access_token');
   res.status(200).json({
-    success: false,
+    success: true,
     status: 200,
+    user: { username: '', role: '' },
     message: 'successfully logout',
   });
 };
 
-module.exports = { loginUser, createUser, logoutUser };
+const isAuthenticated = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ _id: req.user.sub }).populate('todos');
+    res.status(200).json({
+      success: true,
+      status: 200,
+      isAuthenticated: true,
+      user,
+    });
+  } catch (err) {
+    next(createError(500, 'Internal Server Error'));
+  }
+};
+
+module.exports = { loginUser, createUser, logoutUser, isAuthenticated };
