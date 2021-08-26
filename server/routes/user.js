@@ -11,7 +11,7 @@ const {
 
 router.post('/login', loginUser);
 router.post('/register', createUser);
-router.get('/logout', logoutUser);
+router.get('/logout', auth, logoutUser);
 router.get('/authenticate', auth, isAuthenticated);
 
 module.exports = router;

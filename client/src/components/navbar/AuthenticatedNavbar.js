@@ -9,11 +9,11 @@ function UnAuthenticatedNavbar() {
 
   const logoutHandler = async () => {
     try {
+      alert('You are logging out');
       const data = await logout();
-      console.log('data', data);
       if (data.success) {
         setUser(data.user);
-        setAuthenticated(true);
+        setAuthenticated(false);
       }
     } catch (err) {
       console.log(err);
@@ -40,7 +40,7 @@ function UnAuthenticatedNavbar() {
         </li>
       )}
       <li>
-        <button className='btn logout-btn' onClick={logoutHandler}>
+        <button className='link logout-btn' onClick={logoutHandler}>
           logout
         </button>
       </li>

@@ -13,7 +13,7 @@ const loginUser = async (req, res, next) => {
       next(createError(400, 'Empty Field'));
     }
 
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ username }).populate('todos');
     if (!user) {
       next(createError(400, 'No Such User Exist'));
     } else {
@@ -31,9 +31,8 @@ const loginUser = async (req, res, next) => {
         res.status(200).json({
           success: true,
           isAuthenticated: true,
-          message: 'You are authenticated',
-          role: user.role,
-          tokenExpiresIn: expiresIn,
+          message: { isError: false, msgBody: 'Successfully Logged In' },
+          user,
         });
       }
     }
@@ -58,7 +57,7 @@ const createUser = async (req, res, next) => {
       res.status(200).json({
         success: true,
         status: 200,
-        message: 'Sucessfully registered',
+        message: { isError: false, msgBody: 'Successfully Registered' },
       });
     }
   } catch (err) {

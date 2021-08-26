@@ -33,7 +33,7 @@ const issueJWT = (user) => {
 
 const auth = (req, res, next) => {
   try {
-    if (!req.cookies || !req.cookies.access_token) {
+    if (!req.cookies && !req.cookies.access_token) {
       next(createError(401, 'You are not authorized'));
     }
     const tokenParts = req.cookies.access_token.split(' ');
@@ -46,6 +46,8 @@ const auth = (req, res, next) => {
       });
       req.user = verification;
       next();
+    } else {
+      next(createError(401, 'You are not authorized'));
     }
   } catch (err) {
     next(createError(401, 'You are not authorized'));

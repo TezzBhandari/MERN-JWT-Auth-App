@@ -56,6 +56,12 @@
   transition: all 0.3s ease 0s;
 }
 
+.nav-links .logout-btn {
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
 .nav-links li .logout-btn {
   background: transparent;
 }

@@ -11,7 +11,6 @@ function GlobalAuthContext({ children }) {
   useEffect(() => {
     isAuthenticated()
       .then((data) => {
-        console.log(data);
         setUser(data.user);
         setAuthenticated(data.isAuthenticated);
         setIsLoading(false);
@@ -24,8 +23,8 @@ function GlobalAuthContext({ children }) {
   return (
     <>
       {isLoading ? (
-        <div className='loading'>
-          <h1>Loading...</h1>
+        <div className='loading-container'>
+          <div className='loading'></div>
         </div>
       ) : (
         <AuthContext.Provider

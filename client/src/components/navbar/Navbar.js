@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './Navbar.css';
 import { useGlobalContext } from '../../context/GlobalAuthContext';
@@ -11,9 +12,9 @@ function Navbar() {
   return (
     <header className='header'>
       <div className='logo-container'>
-        <a to='/' className='logo'>
+        <Link to='/' className='logo'>
           JWT App
-        </a>
+        </Link>
       </div>
       <nav className='nav-container'>
         <ul className='nav-links'>
