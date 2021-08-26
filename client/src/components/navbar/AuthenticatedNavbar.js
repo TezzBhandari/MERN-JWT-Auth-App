@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useGlobalContext } from '../../context/GlobalAuthContext';
 import { logout } from '../../services/AuthService';
 
-function UnAuthenticatedNavbar() {
+function AuthenticatedNavbar() {
   const { user, setUser, setAuthenticated } = useGlobalContext();
 
   const logoutHandler = async () => {
@@ -48,4 +48,4 @@ function UnAuthenticatedNavbar() {
   );
 }
 
-export default UnAuthenticatedNavbar;
+export default AuthenticatedNavbar;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Form.css';
 
-import { isAuthenticated, login } from '../services/AuthService';
+import { login } from '../services/AuthService';
 import { useGlobalContext } from '../context/GlobalAuthContext';
 import Message from './Message';
 

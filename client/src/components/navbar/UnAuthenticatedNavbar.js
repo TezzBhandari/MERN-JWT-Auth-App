@@ -1,9 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 function UnAuthenticatedNavbar() {
   return (
     <>
+      <Redirect to='/login' />
+      {/* Redirects To Login Page If You Are Not LoggedIn or Authorized */}
       <li>
         <Link to='/' className='link'>
           Home

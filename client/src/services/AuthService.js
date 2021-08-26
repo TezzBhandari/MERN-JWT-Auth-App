@@ -35,13 +35,17 @@ export const logout = async () => {
 
 export const isAuthenticated = async () => {
   try {
-    const response = await axios.get(`${domain}/user/authenticate`);
+    const response = await axios.get(`${domain}/user/authenticate`, {
+      withCredentials: true,
+    });
     return response.data;
   } catch (err) {
+    console.log('autherror\n', err.response.data);
     if (err.response.status === 401) {
       return { isAuthenticated: false, user: { username: '', role: '' } };
     } else {
-      console.log(err.response);
+      console.log(err.response.data);
+      return new Error('Server Error');
     }
   }
 };

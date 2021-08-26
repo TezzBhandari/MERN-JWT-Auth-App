@@ -16,7 +16,7 @@ function GlobalAuthContext({ children }) {
         setIsLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        console.log('Server Error. Try Again!', err);
       });
   }, []);
 

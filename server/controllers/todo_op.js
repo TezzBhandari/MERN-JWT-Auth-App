@@ -12,13 +12,16 @@ const addTodos = async (req, res, next) => {
         $push: { todos: todo._id },
       },
       { new: true }
-    );
+    ).populate('todos');
     res.status(200).json({
       success: true,
       status: 200,
-      message: 'Successfully Added The Todos',
-      todo,
-      user,
+      message: {
+        isError: false,
+        msgBody: 'Successfully Added The Todos',
+      },
+      user: { username: user.username, role: user.role },
+      todos: user.todos,
     });
   } catch (err) {
     next(createError(500, 'Internal Server Error'));
@@ -31,6 +34,7 @@ const getTodos = async (req, res, next) => {
     res.status(200).json({
       success: true,
       status: 200,
+      message: { isError: false, msgBody: 'All Todos' },
       user: user.username,
       todos: user.todos,
     });

@@ -6,7 +6,7 @@ import Navbar from './components/navbar/Navbar';
 import Home from './components/home/Home';
 import Register from './components/Register';
 import Login from './components/Login';
-import Todos from './components/todos/Todos';
+import TodoApp from './components/todos/TodoApp';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
         <Route exact path='/' component={Home} />
         <Route path='/login' component={Login} />
         <Route path='/register' component={Register} />
-        <Route path='/todos' component={Todos} />
+        <Route path='/todos' component={TodoApp} />
       </Switch>
     </Router>
   );

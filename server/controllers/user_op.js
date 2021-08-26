@@ -75,11 +75,18 @@ const logoutUser = (req, res, next) => {
   });
 };
 
-const isAuthenticated = (req, res, next) => {
-  res.status(200).json({
-    success: true,
-    user: req.user,
-  });
+const isAuthenticated = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ _id: req.user.sub }).populate('todos');
+    res.status(200).json({
+      success: true,
+      status: 200,
+      isAuthenticated: true,
+      user,
+    });
+  } catch (err) {
+    next(createError(500, 'Internal Server Error'));
+  }
 };
 
 module.exports = { loginUser, createUser, logoutUser, isAuthenticated };
